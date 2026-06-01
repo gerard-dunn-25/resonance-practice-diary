@@ -12,4 +12,6 @@ public class ResonanceDbContext
         : base(options)
     {
     }
+
+    public DbSet<UserInstrument> UserInstruments => Set<UserInstrument>();
 }
