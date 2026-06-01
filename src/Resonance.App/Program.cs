@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Resonance.App.Components;
 using Resonance.App.Data;
 using Resonance.App.Models;
+using Resonance.App.Data.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,8 @@ builder.Services
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+await MoodTagSeeder.SeedAsync(app.Services);
 
 if (!app.Environment.IsDevelopment())
 {
