@@ -14,4 +14,7 @@ public class ResonanceDbContext
     }
 
     public DbSet<UserInstrument> UserInstruments => Set<UserInstrument>();
+
+    public DbSet<Goal> Goals => Set<Goal>();
+    
 }

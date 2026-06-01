@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Resonance.App.Data;
 
@@ -11,9 +12,11 @@ using Resonance.App.Data;
 namespace Resonance.App.Migrations
 {
     [DbContext(typeof(ResonanceDbContext))]
-    partial class ResonanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260601053603_AddGoal")]
+    partial class AddGoal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
