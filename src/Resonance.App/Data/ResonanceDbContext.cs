@@ -12,7 +12,4 @@ public class ResonanceDbContext
         : base(options)
     {
     }
-
-    public DbSet<PracticePlaceholder> PracticePlaceholders =>
-        Set<PracticePlaceholder>();
 }

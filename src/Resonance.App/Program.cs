@@ -6,7 +6,6 @@ using Resonance.App.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adding services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -14,7 +13,17 @@ builder.Services.AddDbContext<ResonanceDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+builder.Services.AddCascadingAuthenticationState();
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = IdentityConstants.ApplicationScheme;
+        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+    })
+    .AddIdentityCookies();
+
+builder.Services
+    .AddIdentityCore<ApplicationUser>(options =>
     {
         options.Password.RequireDigit = true;
         options.Password.RequireLowercase = true;
@@ -23,23 +32,25 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         options.Password.RequiredLength = 8;
     })
     .AddEntityFrameworkStores<ResonanceDbContext>()
+    .AddSignInManager()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// Todo: Configure HTTPS for the dev profile later
+// app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 app.UseAntiforgery();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
