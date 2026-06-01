@@ -22,20 +22,28 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/Goals.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Hb2Fscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
+[/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/LogSession.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Mb2dTZXNzaW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Qcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Pages/SessionHistory.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TZXNzaW9uSGlzdG9yeS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/Components/Routes.razor]

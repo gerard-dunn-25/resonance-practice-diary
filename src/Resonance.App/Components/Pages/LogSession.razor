@@ -1,0 +1,100 @@
+@page "/log-session"
+
+<PageTitle>Log Session</PageTitle>
+
+<h1>Log a Session</h1>
+
+<EditForm Model="@form" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="date">Date</label>
+        <InputDate id="date" @bind-Value="form.Date" />
+    </div>
+
+    <div>
+        <label for="durationHours">Duration</label>
+        <InputNumber id="durationHours" @bind-Value="form.DurationHours" />
+        <span>hours</span>
+        <InputNumber id="durationMinutes" @bind-Value="form.DurationMinutes" />
+        <span>minutes</span>
+    </div>
+
+    <div>
+        <label>Instrument</label>
+        <p>@form.InstrumentName</p>
+    </div>
+
+    <div>
+        <label for="moodTag">Mood tag</label>
+        <InputSelect id="moodTag" @bind-Value="form.MoodTagId">
+            <option value="">Select a mood tag</option>
+            @foreach (var tag in moodTags)
+            {
+                <option value="@tag.Id">@tag.Label</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div>
+        <label for="reflection">Reflection</label>
+        <InputTextArea id="reflection" @bind-Value="form.Reflection" />
+    </div>
+
+    <div>
+        <label>Focus tags</label>
+        @for (var i = 0; i < form.FocusTags.Count; i++)
+        {
+            <div>
+                <InputText @bind-Value="form.FocusTags[i]" />
+            </div>
+        }
+    </div>
+
+    <button type="button" @onclick="AddFocusTag">Add focus tag</button>
+    <button type="submit">Save session</button>
+</EditForm>
+
+@code {
+    private readonly SessionFormModel form = new()
+    {
+        Date = DateOnly.FromDateTime(DateTime.Today),
+        InstrumentName = "Guitar"
+    };
+
+    private readonly List<MoodTagOption> moodTags =
+    [
+        new MoodTagOption(1, "In the zone"),
+        new MoodTagOption(2, "Grinding"),
+        new MoodTagOption(3, "Distracted"),
+        new MoodTagOption(4, "Frustrated"),
+        new MoodTagOption(5, "Surprised myself")
+    ];
+
+    private void AddFocusTag()
+    {
+        if (form.FocusTags.Count < 3)
+        {
+            form.FocusTags.Add(string.Empty);
+        }
+    }
+
+    private void HandleValidSubmit()
+    {
+        // Save logic later
+    }
+
+    private sealed class SessionFormModel
+    {
+        public DateOnly Date { get; set; }
+        public int DurationHours { get; set; }
+        public int DurationMinutes { get; set; }
+        public string InstrumentName { get; set; } = string.Empty;
+        public int? MoodTagId { get; set; }
+        public string Reflection { get; set; } = string.Empty;
+        public List<string> FocusTags { get; set; } = [];
+    }
+
+    private sealed record MoodTagOption(int Id, string Label);
+}
