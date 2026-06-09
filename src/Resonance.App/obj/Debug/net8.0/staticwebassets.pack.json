@@ -21,6 +21,14 @@
       "PackagePath": "staticwebassets/favicon.png"
     },
     {
+      "Id": "/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/wwwroot/images/resonance-icon.svg",
+      "PackagePath": "staticwebassets/images/resonance-icon.svg"
+    },
+    {
+      "Id": "/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/wwwroot/images/resonance-logo.svg",
+      "PackagePath": "staticwebassets/images/resonance-logo.svg"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Resonance.App.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

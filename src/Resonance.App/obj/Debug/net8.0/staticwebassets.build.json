@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0d2+oM3EER4GUCbH1IAoUg3Wse0yijdvnMi7jMfzRQg=",
+  "Hash": "wYN9wXlqv0dTILUnF0NHGiwJuL2BFz5vfOHUMUmF+6c=",
   "Source": "Resonance.App",
   "BasePath": "_content/Resonance.App",
   "Mode": "Default",
@@ -129,6 +129,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.png"
+    },
+    {
+      "Identity": "/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/wwwroot/images/resonance-icon.svg",
+      "SourceId": "Resonance.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/wwwroot/",
+      "BasePath": "_content/Resonance.App",
+      "RelativePath": "images/resonance-icon.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/resonance-icon.svg"
+    },
+    {
+      "Identity": "/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/wwwroot/images/resonance-logo.svg",
+      "SourceId": "Resonance.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/wwwroot/",
+      "BasePath": "_content/Resonance.App",
+      "RelativePath": "images/resonance-logo.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/resonance-logo.svg"
     }
   ]
 }

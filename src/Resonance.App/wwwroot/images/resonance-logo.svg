@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Ring 1 — outer -->
+  <circle
+    cx="256"
+    cy="256"
+    r="192"
+    fill="none"
+    stroke="#6A4FA8"
+    stroke-width="14"
+    opacity="0.4"
+  />
+
+  <!-- Ring 2 -->
+  <circle
+    cx="256"
+    cy="256"
+    r="141"
+    fill="none"
+    stroke="#8F72CC"
+    stroke-width="18"
+    opacity="0.6"
+  />
+
+  <!-- Ring 3 -->
+  <circle
+    cx="256"
+    cy="256"
+    r="90"
+    fill="none"
+    stroke="#B89EE8"
+    stroke-width="22"
+    opacity="0.8"
+  />
+
+  <!-- Ring 4 — inner -->
+  <circle
+    cx="256"
+    cy="256"
+    r="39"
+    fill="none"
+    stroke="#D8C8F8"
+    stroke-width="26"
+    opacity="0.95"
+  />
+
+  <!-- Centre dot -->
+  <circle cx="256" cy="256" r="12" fill="#EEE8FF" />
+</svg>

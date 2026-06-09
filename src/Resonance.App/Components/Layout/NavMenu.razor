@@ -1,41 +1,107 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Resonance</a>
+﻿@inject NavigationManager NavigationManager
+
+<nav class="nav-shell" aria-label="Primary">
+    <a class="nav-brand" href="/">
+        <img
+            class="nav-brand-icon"
+            src="images/resonance-logo.svg"
+            alt=""
+            aria-hidden="true" />
+        <span class="nav-brand-text">Resonance</span>
+    </a>
+
+    <div class="nav-mobile">
+        <a class="@GetMobileNavButtonClass("/", false)" href="/">
+            <span class="nav-icon bi bi-house-door-fill" aria-hidden="true"></span>
+            <span class="nav-label">Home</span>
+        </a>
+
+        <a class="@GetMobileNavButtonClass("/sessions", false)" href="/sessions">
+            <span class="nav-icon bi bi-clock-history" aria-hidden="true"></span>
+            <span class="nav-label">Session History</span>
+        </a>
+
+        <a class="@GetMobileNavButtonClass("/log-session", true)" href="/log-session">
+            <span class="nav-icon bi bi-plus-circle-fill" aria-hidden="true"></span>
+            <span class="nav-label">Log Session</span>
+        </a>
+
+        <a class="@GetMobileNavButtonClass("/goals", false)" href="/goals">
+            <span class="nav-icon bi bi-list-check" aria-hidden="true"></span>
+            <span class="nav-label">Goals</span>
+        </a>
+
+        <a class="@GetMobileNavButtonClass("/profile", false)" href="/profile">
+            <span class="nav-icon bi bi-person-circle" aria-hidden="true"></span>
+            <span class="nav-label">Profile</span>
+        </a>
     </div>
-</div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+    <div class="nav-desktop">
+        <a class="@GetDesktopNavButtonClass("/sessions")" href="/sessions">
+            <span class="nav-icon bi bi-clock-history" aria-hidden="true"></span>
+            <span class="nav-label">Session History</span>
+        </a>
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
+        <a class="@GetDesktopNavButtonClass("/log-session", true)" href="/log-session">
+            <span class="nav-icon bi bi-plus-circle-fill" aria-hidden="true"></span>
+            <span class="nav-label">Log Session</span>
+        </a>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="log-session">
-                <span class="bi bi-pencil-square" aria-hidden="true"></span> Log Session
-            </NavLink>
-        </div>
+        <a class="@GetDesktopNavButtonClass("/goals")" href="/goals">
+            <span class="nav-icon bi bi-list-check" aria-hidden="true"></span>
+            <span class="nav-label">Goals</span>
+        </a>
+    </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="sessions">
-                <span class="bi bi-clock-history" aria-hidden="true"></span> Session History
-            </NavLink>
-        </div>
+    <div class="nav-divider" aria-hidden="true"></div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="goals">
-                <span class="bi bi-list-check" aria-hidden="true"></span> Goals
-            </NavLink>
-        </div>
+    <a class="nav-profile" href="/profile" aria-label="Profile">
+        <span class="bi bi-person-circle" aria-hidden="true"></span>
+    </a>
+</nav>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="profile">
-                <span class="bi bi-person-circle" aria-hidden="true"></span> Profile
-            </NavLink>
-        </div>
-    </nav>
-</div>
+@code {
+    private string CurrentPath
+    {
+        get
+        {
+            var current = "/" + NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+            return current == "//" ? "/" : current;
+        }
+    }
+
+    private string GetMobileNavButtonClass(string path, bool isPrimary)
+    {
+        var classes = new List<string> { "nav-button" };
+
+        if (isPrimary)
+        {
+            classes.Add("nav-button-primary");
+        }
+
+        if (CurrentPath.Equals(path, StringComparison.OrdinalIgnoreCase))
+        {
+            classes.Add("active");
+        }
+
+        return string.Join(" ", classes);
+    }
+
+    private string GetDesktopNavButtonClass(string path, bool isPrimary = false)
+    {
+        var classes = new List<string> { "nav-button" };
+
+        if (isPrimary)
+        {
+            classes.Add("nav-button-primary");
+        }
+
+        if (CurrentPath.Equals(path, StringComparison.OrdinalIgnoreCase))
+        {
+            classes.Add("active");
+        }
+
+        return string.Join(" ", classes);
+    }
+}
