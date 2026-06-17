@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -34,29 +35,46 @@ public class LoginModel : PageModel
         public bool RememberMe { get; set; }
     }
 
-    public void OnGet()
+    public async Task OnGetAsync()
     {
+        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
     }
 
     public async Task<IActionResult> OnPostAsync()
-{
-    if (!ModelState.IsValid)
     {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        var result = await _signInManager.PasswordSignInAsync(
+            Input.Email,
+            Input.Password,
+            Input.RememberMe,
+            lockoutOnFailure: false);
+
+        if (result.Succeeded)
+        {
+            return LocalRedirect(ReturnUrl ?? "/");
+        }
+
+        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
         return Page();
     }
 
-    var result = await _signInManager.PasswordSignInAsync(
-        Input.Email,
-        Input.Password,
-        Input.RememberMe,
-        lockoutOnFailure: false);
-
-    if (result.Succeeded)
+    public IActionResult OnPostGoogleLogin(string? returnUrl = null)
     {
-        return LocalRedirect(ReturnUrl ?? "/");
-    }
+        returnUrl ??= Url.Content("~/");
 
-    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-    return Page();
-}
+        var redirectUrl = Url.Page(
+            "/Account/ExternalLogin",
+            pageHandler: null,
+            values: new { area = "Identity", returnUrl });
+
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties(
+            "Google",
+            redirectUrl);
+
+        return new ChallengeResult("Google", properties);
+    }
 }

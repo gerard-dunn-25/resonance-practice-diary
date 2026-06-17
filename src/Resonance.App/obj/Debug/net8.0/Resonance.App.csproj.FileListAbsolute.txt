@@ -137,3 +137,4 @@
 /home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/obj/Debug/net8.0/Resonance.App.RazorAssemblyInfo.cache
 /home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/obj/Debug/net8.0/Resonance.App.RazorAssemblyInfo.cs
+/home/gerard/Workspace/resonance-practice-diary/src/Resonance.App/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.Google.dll

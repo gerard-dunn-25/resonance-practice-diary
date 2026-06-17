@@ -29,6 +29,11 @@
     <button type="submit">Log in</button>
 </form>
 
+<form method="post" asp-page-handler="GoogleLogin">
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+    <button type="submit">Continue with Google</button>
+</form>
+
 <p>
     <a href="/Identity/Account/Register">Register as a new user</a>
 </p>

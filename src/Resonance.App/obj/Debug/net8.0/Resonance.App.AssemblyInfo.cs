@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("219473da-f9bc-4845-8cc4-481753a4db99")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Resonance.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b97d07583c83e1297090ff03d4de15b0a6788d2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0401941c46fb5f85f94b619568bb53f4f81a3b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Resonance.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Resonance.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
