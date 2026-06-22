@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Resonance.App.Components;
 using Resonance.App.Data;
-using Resonance.App.Models;
 using Resonance.App.Data.Seeders;
+using Resonance.App.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,14 +18,16 @@ builder.Services.AddDbContext<ResonanceDbContext>(options =>
 
 builder.Services.AddCascadingAuthenticationState();
 
-builder.Services.AddAuthentication(options =>
+builder.Services
+    .AddAuthentication(options =>
     {
         options.DefaultScheme = IdentityConstants.ApplicationScheme;
         options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
     })
     .AddIdentityCookies();
 
-builder.Services.AddAuthentication()
+builder.Services
+    .AddAuthentication()
     .AddGoogle(options =>
     {
         options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;

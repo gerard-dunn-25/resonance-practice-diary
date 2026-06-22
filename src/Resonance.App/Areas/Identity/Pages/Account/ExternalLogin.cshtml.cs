@@ -23,26 +23,28 @@ public class ExternalLoginModel : PageModel
     [TempData]
     public string? ErrorMessage { get; set; }
 
-    public string? ReturnUrl { get; set; }
-
     public async Task<IActionResult> OnGetAsync(
         string? returnUrl = null,
         string? remoteError = null)
     {
-        ReturnUrl = returnUrl ?? Url.Content("~/");
+        var safeReturnUrl = Url.IsLocalUrl(returnUrl)
+            ? returnUrl
+            : Url.Content("~/");
 
-        if (!string.IsNullOrEmpty(remoteError))
+        if (!string.IsNullOrWhiteSpace(remoteError))
         {
             ErrorMessage = $"Error from external provider: {remoteError}";
-            return RedirectToPage("./Login", new { ReturnUrl });
+            return RedirectToPage("./Login", new { returnUrl = safeReturnUrl });
         }
 
         var info = await _signInManager.GetExternalLoginInfoAsync();
         if (info == null)
         {
             ErrorMessage = "Error loading external login information.";
-            return RedirectToPage("./Login", new { ReturnUrl });
+            return RedirectToPage("./Login", new { returnUrl = safeReturnUrl });
         }
+
+        await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
         var signInResult = await _signInManager.ExternalLoginSignInAsync(
             info.LoginProvider,
@@ -52,31 +54,46 @@ public class ExternalLoginModel : PageModel
 
         if (signInResult.Succeeded)
         {
-            return LocalRedirect(ReturnUrl);
+            return LocalRedirect(safeReturnUrl!);
+        }
+
+        if (signInResult.IsLockedOut)
+        {
+            return RedirectToPage("./Lockout");
+        }
+
+        if (signInResult.IsNotAllowed)
+        {
+            ErrorMessage = "This account is not allowed to sign in.";
+            return RedirectToPage("./Login", new { returnUrl = safeReturnUrl });
         }
 
         var email = info.Principal.FindFirstValue(ClaimTypes.Email);
         if (string.IsNullOrWhiteSpace(email))
         {
             ErrorMessage = "Google account did not return an email address.";
-            return RedirectToPage("./Login", new { ReturnUrl });
+            return RedirectToPage("./Login", new { returnUrl = safeReturnUrl });
         }
 
-        var user = new ApplicationUser
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
         {
-            UserName = email,
-            Email = email,
-            DisplayName = info.Principal.FindFirstValue(ClaimTypes.Name) ?? email,
-            CreatedAt = DateTime.UtcNow
-        };
+            user = new ApplicationUser
+            {
+                UserName = email,
+                Email = email,
+                DisplayName = info.Principal.FindFirstValue(ClaimTypes.Name) ?? email,
+                CreatedAt = DateTime.UtcNow
+            };
 
-        var createResult = await _userManager.CreateAsync(user);
-        if (!createResult.Succeeded)
-        {
-            ErrorMessage = string.Join(
-                "; ",
-                createResult.Errors.Select(e => e.Description));
-            return RedirectToPage("./Login", new { ReturnUrl });
+            var createResult = await _userManager.CreateAsync(user);
+            if (!createResult.Succeeded)
+            {
+                ErrorMessage = string.Join(
+                    "; ",
+                    createResult.Errors.Select(e => e.Description));
+                return RedirectToPage("./Login", new { returnUrl = safeReturnUrl });
+            }
         }
 
         var addLoginResult = await _userManager.AddLoginAsync(user, info);
@@ -85,11 +102,10 @@ public class ExternalLoginModel : PageModel
             ErrorMessage = string.Join(
                 "; ",
                 addLoginResult.Errors.Select(e => e.Description));
-            return RedirectToPage("./Login", new { ReturnUrl });
+            return RedirectToPage("./Login", new { returnUrl = safeReturnUrl });
         }
 
         await _signInManager.SignInAsync(user, isPersistent: false);
-
-        return LocalRedirect(ReturnUrl);
+        return LocalRedirect(safeReturnUrl!);
     }
 }

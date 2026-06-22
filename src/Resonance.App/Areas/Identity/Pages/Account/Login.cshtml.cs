@@ -62,13 +62,12 @@ public class LoginModel : PageModel
         return Page();
     }
 
-    public IActionResult OnPostGoogleLogin(string? returnUrl = null)
+    public IActionResult OnPostGoogleLogin()
     {
-        returnUrl ??= Url.Content("~/");
+        var returnUrl = Url.IsLocalUrl(ReturnUrl) ? ReturnUrl : Url.Content("~/");
 
         var redirectUrl = Url.Page(
             "/Account/ExternalLogin",
-            pageHandler: null,
             values: new { area = "Identity", returnUrl });
 
         var properties = _signInManager.ConfigureExternalAuthenticationProperties(
