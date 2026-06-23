@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/Resonance.App.props" />
-</Project>
